@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Listeners</title>
+</head>
+<body>
+<div id="root">
+    <input type="text" placeholder="Enter name" v-model="newName">
+    <button @click="addName">Add name</button>
+    <!-- use @ insetad of v-on
+        <button @click="addName">Add name</button>
+    -->
+    <hr>
+    <h6>Lists of names</h6>
+    <ul>
+        <li v-for="name in names" v-text="name"></li>
+    </ul>
+
+    <hr>
+    <h6></h6>
+
+</div>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    let vm = new Vue({
+        el: "#root",
+        data: {
+            newName: '',
+            names: ['Rakesh','Sujan','Aakash','Dilip'],
+        },
+        methods: {
+            addName() {
+                console.log('hell ok');
+                this.names.push(this.newName);
+                console.log(this.names);
+                this.newName = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>

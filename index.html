@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>To do App</h2>
+            <div id="root">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Enter Task</label>
+                    <input type="email" class="form-control" id="task" placeholder="Enter task" v-model="newTask">
+                    <small id="taskHelp" class="form-text text-muted">We'll enter new task.</small>
+                </div>
+                <button type="submit" class="btn btn-primary" v-on:click="addTask">Add Task</button>
+                <hr>
+                <h4>Task List</h4>
+                <p v-show="noTask"><small>There is no task. Newly added task will be listed here.</small> </p>
+                <table class="table" v-show="!noTask">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Remarks</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr v-for="(task,key) in tasks">
+                            <td v-bind:class="[`task--${key}`]">{{ task }}</td>
+                            <td><span v-on:click="taskCompleted(key)"><input type="checkbox">completed</span> <span><input type="checkbox">deleted</span></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: "#root",
+            data: {
+                newTask: '',
+                tasks: [],
+                task: 'Test task',
+                message: 'Hello world',
+                noTask: true,
+            },
+            methods: {
+                addTask() {
+                    this.tasks.push(this.newTask);
+                    this.noTask = false;
+                    this.newTask = '';
+                },
+                taskCompleted(id) {
+                    console.log('id '+id);
+                },
+                taskDeleted(id) {
+
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
