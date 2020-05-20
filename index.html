@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Todo App - Vue js</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <style>
         .completed {
             text-decoration: line-through;
@@ -27,9 +26,8 @@
             <h2>To do App</h2>
             <div id="root" v-cloak>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Enter Task</label>
                     <input type="email" class="form-control" id="task" required placeholder="Enter task" v-model="newTask" v-on:keyup.enter="addTask">
-                    <small id="taskHelp" class="form-text text-muted">We'll enter new task.</small>
+                    <small id="taskHelp" class="form-text text-muted">Please enter a task to be listed.</small>
                 </div>
                 <button type="submit" class="btn btn-primary" v-on:click="addTask">Add Task</button>
                 <hr>
