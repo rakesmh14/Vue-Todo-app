@@ -1,2 +1,2 @@
-# Vue-Todo-app
-Simple Todo app using Vue js
+# Todo App
+This is a simple Todo App using Vue js.
