@@ -62,32 +62,6 @@
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script>
-        let vm = new Vue({
-            el: "#root",
-            data: {
-                newTask: '',
-                tasks: [],
-                noTask: true,
-                completedTasks: [],
-                deletedTasks: [],
-            },
-            methods: {
-                addTask() {
-                    this.tasks.push(this.newTask);
-                    this.noTask = false;
-                    this.newTask = '';
-                },
-                taskCompleted(id) {
-                    // unused method
-                    // console.log(this.completedTasks);
-                },
-                taskDeleted(id) {
-                    // unused method
-                    // console.log(this.deletedTasks);
-                },
-            }
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
