@@ -5,33 +5,53 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: green;
+        }
+
+        .deleted {
+            text-decoration: line-through;
+            color: #ff0000;
+            display: none;
+        }
+
+        [v-cloak] > * { display:none }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <h2>To do App</h2>
-            <div id="root">
+            <div id="root" v-cloak>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Enter Task</label>
-                    <input type="email" class="form-control" id="task" placeholder="Enter task" v-model="newTask">
+                    <input type="email" class="form-control" id="task" required placeholder="Enter task" v-model="newTask" v-on:keyup.enter="addTask">
                     <small id="taskHelp" class="form-text text-muted">We'll enter new task.</small>
                 </div>
                 <button type="submit" class="btn btn-primary" v-on:click="addTask">Add Task</button>
                 <hr>
-                <h4>Task List</h4>
+                <h4>Task Lists</h4>
                 <p v-show="noTask"><small>There is no task. Newly added task will be listed here.</small> </p>
                 <table class="table" v-show="!noTask">
                     <thead>
                         <tr>
-                            <th>Task</th>
-                            <th>Remarks</th>
+                            <th>Tasks</th>
+                            <th>Action</th>
                         </tr>
 
                     </thead>
                     <tbody>
-                        <tr v-for="(task,key) in tasks">
-                            <td v-bind:class="[`task--${key}`]">{{ task }}</td>
-                            <td><span v-on:click="taskCompleted(key)"><input type="checkbox">completed</span> <span><input type="checkbox">deleted</span></td>
+                        <tr v-for="(task,key) in tasks" v-bind:class="{deleted : deletedTasks.includes(key) }">
+                            <td v-bind:class="[`task--${key}`]"><div class="checkbox" v-bind:class="{completed : completedTasks.includes(key) , deleted : deletedTasks.includes(key) }">{{ task }}</div></td>
+                            <td>
+                                <div class="checkbox">
+                                    <label v-on:click="taskCompleted(key)"><input type="checkbox" id="[`task--${key}`]" v-model="completedTasks" v-bind:value="key">Completed</label>&nbsp;&nbsp;
+                                    <label v-on:click="taskDeleted(key)"><input type="checkbox" id="[`task--${key}`]" v-model="deletedTasks" v-bind:value="key">Deleted</label>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
 
@@ -48,9 +68,9 @@
             data: {
                 newTask: '',
                 tasks: [],
-                task: 'Test task',
-                message: 'Hello world',
                 noTask: true,
+                completedTasks: [],
+                deletedTasks: [],
             },
             methods: {
                 addTask() {
@@ -59,14 +79,15 @@
                     this.newTask = '';
                 },
                 taskCompleted(id) {
-                    console.log('id '+id);
+                    // unused method
+                    // console.log(this.completedTasks);
                 },
                 taskDeleted(id) {
-
-                }
+                    // unused method
+                    // console.log(this.deletedTasks);
+                },
             }
         });
     </script>
-
 </body>
 </html>
